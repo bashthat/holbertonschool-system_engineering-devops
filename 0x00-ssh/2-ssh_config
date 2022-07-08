@@ -1,0 +1,13 @@
+#SSH  configuration for an API server connection.
+
+
+Host 54.90.187.184
+
+    HostName 54.90.187.184
+    User Ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
