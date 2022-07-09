@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# working nginx web server
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+file1=/usr/share/nginx/html/index.html
+sudo bash -c "echo 'Holberton School ftw!' > $file1"
+service nginx start
