@@ -20,3 +20,4 @@ sudo sed -i "s@$find@$replace301@" /etc/nginx/sites-available/default
 # restart / reload
 
 sudo service nginx restart
+sudo service nginx reload
