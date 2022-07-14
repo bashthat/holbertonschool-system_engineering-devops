@@ -1,4 +1,4 @@
-#!/usr/bin bash
+#!/usr/bin/env bash
 # this is a script to configure multiple web servers with nginx
 
 find="^\tlocation / {"
