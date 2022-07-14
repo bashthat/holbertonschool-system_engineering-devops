@@ -3,7 +3,7 @@
 #Install and configure HAproxy on your lb-01 server.
 addlines="frontend http_web\n\tbind *:80\n\tmode http\n\tdefault_backend custom_backend\nbackend
 custom_backend\n\tbalance roundrobin\n\toption forwardfor\n\tserver
-3249-web-01 54.90.187.184 check\n\tserver 3249-web-02 3.93.201.98 check"
+3249-web-01 3.84.200.63 check\n\tserver 3249-web-02 54.160.229.213 check"
 
 # upgrading web server(s)
 sudo apt-get -y update
