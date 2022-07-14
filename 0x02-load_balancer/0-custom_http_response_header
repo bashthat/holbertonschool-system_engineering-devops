@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
-# this is a script to configure multiple web servers with nginx
+# configures nginx config file to redirect
 
-find="^\tlocation / {"
-replace="\tlocation /redirect_me {\n\t\treturn 301 \$scheme://youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n\n\tlocation / {"
-replace404="\terror_page 404 /error404.html;\n\n\tlocation / {"find="^\tlocation / {"
-# nginx install
+oldtext="^\tlocation / {"
+newtext="\tlocation /redirect_me {\n\t\treturn 301 \$scheme://facebook.com;"
+# install and update nginx
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y install nginx
-# firewall
-sudo ufw allow 'Ngnix HTTP'
-
-# html file
-sudo sh -c echo "Hello World" > /var/www/html/index.html
-sudo sh -c echo "Ceci n'est pas une page" > /var/www/html/error404.html
-
-sudo sed -i "s@$find@$replace404@" /etc/nginx/sites-available/default
-sudo sed -i "s@$find@$replace301@" /etc/nginx/sites-available/default
-# restart / reload
-
+sudo service nginx start
+# old and new text
+sudo echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo sed -i "s@$oldtext@$newtext@" /etc/nginx/sites-available/default
+sudo service nginx restart
+sudo echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
+oldtext="^\t}"
+newtext="\t}\n\n\terror_page 404 /error404.html;"
+sudo sed -i "s@$oldtext@$newtext@" /etc/nginx/sites-available/default
+oldtext="^\terror_page 404 /error404.html;"
+newtext="\terror_page 404 /error404.html;\n\n\tadd_header X-Served-By $HOSTNAME;"
+sudo sed -i "s@$oldtext@$newtext@" /etc/nginx/sites-available/default
+# service nginx buffers
 sudo service nginx restart
 sudo service nginx reload
