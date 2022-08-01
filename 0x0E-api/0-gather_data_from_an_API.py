@@ -18,7 +18,7 @@ if __name__ == '__main__':
         req = requests.get('{}/{}'.format(url, userId))
         data = req.json()
         name = req.json().get('name')
-        if name is not None: # checking the name
+        if name is not None:  # checking the name
             user = requests.get('{}{}/todos'.format(url, userId))
             user = user.json()
             tasks = len(user)
@@ -27,10 +27,11 @@ if __name__ == '__main__':
                 if task.get('completed') is True:
                     complete.append(task)
             CompletedTaskNumber = len(complete)
-            print ('Employee {} is done with tasks({}/{}):'.format(name, CompletedTaskNumber, tasks))
+            print('Employee {} is done with tasks({}/{}):'
+                  .format(name, CompletedTaskNumber, tasks))
             """
             prniting the information
             """
-            for task in complete: # printing the tasks
+            for task in complete:  # printing the tasks
                 title = task.get('title')
-                print ('\t {}'.format(title))
+                print('\t {}'.format(title))
