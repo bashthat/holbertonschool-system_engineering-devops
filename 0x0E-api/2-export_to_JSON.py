@@ -29,7 +29,8 @@ if __name__ == '__main__':
         """
         jsonify the tasks
         """
-        rnr = {str(uid): xyz}
-        juid = '({}.json'.format(uid)
-        with open(juid, mode='w') as jsonf:
-            json.dump(rnr, jsonf)
+        rnr = {}
+        rnr[uid] = xyz
+        
+        with open("{}.json".format(uid), mode='w') as f:
+            json.dump(rnr, f)
