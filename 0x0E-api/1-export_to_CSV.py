@@ -3,18 +3,18 @@
 """
 using a REST API returning the TODO list progress
 """
-
+import csv
 import requests
 from sys import argv
-import csv
+
 
 if __name__ == "__main__":
     R = requests.get(
         "https://jsonplaceholder.typicode.com/users/{:}".format(argv[1])
     ).json()
     R_two = requests.get(
-        "https://jsonplaceholder.typicode.com/todos/?userId={:}".format(argv[1])
-    ).json()
+        "https://jsonplaceholder.typicode.com/todos/?userId={:}".format
+        (argv[1])).json()
     """
     adding details
     """
