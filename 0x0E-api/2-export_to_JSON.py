@@ -19,15 +19,15 @@ if __name__ == '__main__':
         user = req.get('username')
         todos = requests.get("{}users/{}/todos".format(url, uid)).json()
         task = [{"task": t.get("title"),
-              "completed": t.get("completed"),
-              "username": user} for t in todos]
+                 "completed": t.get("completed"),
+                 "username": user} for t in todos]
         """
         jsonify the tasks
         """
         jd = {}
         jd[uid] = task
         with open('{}.json'.format(uid), 'w') as jsonf:
-            json.dump(task, jsonf) 
+            json.dump(task, jsonf)
     else:
         print('usage: {} <user_id>'.format(argv[0]))
         exit(1)  # word
