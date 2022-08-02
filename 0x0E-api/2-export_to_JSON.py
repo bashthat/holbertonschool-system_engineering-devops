@@ -5,29 +5,31 @@
 using a REST API returning the TODO list progress
 """
 
+from cgitb import reset
 import requests
-from sys import argv
-import csv
+import sys
 import json
 
 if __name__ == '__main__':
-    if len(argv) > 1:
-        """handling the arguments"""
-        uid = argv[1]
+        uid = sys.argv[1]  # too many comments
         url = "https://jsonplaceholder.typicode.com/"
-        req = requests.get("{}users/{}".format(url, uid)).json()
-        user = req.get('username')
-        todos = requests.get("{}users/{}/todos".format(url, uid)).json()
-        task = [{"task": t.get("title"),
-                 "completed": t.get("completed"),
-                 "username": user} for t in todos]
+        user = "{}users/{}".format(url, uid)
+        req = requests.get(user)
+        jx = req.json()
+        name = jx.get('username')
+        todos = "{}todos?uid={}".format(url, uid)
+        req = requests.get(todos)
+        jx = req.json()
+        xyz = []
+        for task in jx:
+            rnr = [{"task": task.get("title"),
+                    "completed": task.get("completed"),
+                    "username": name}]
+            xyz.append(rnr)  # append the username to the task
         """
         jsonify the tasks
         """
-        jd = {}
-        jd[uid] = task
-        with open('{}.json'.format(uid), 'w') as jsonf:
-            json.dump(task, jsonf)
-    else:
-        print('usage: {} <user_id>'.format(argv[0]))
-        exit(1)  # word
+        rnr = {str(uid): xyz}
+        juid = '({}.json'.format(uid)
+        with open(juid, mode='w') as jsonf:
+            json.dump(rnr, jsonf)
