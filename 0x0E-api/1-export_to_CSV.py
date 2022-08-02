@@ -17,16 +17,16 @@ if __name__ == '__main__':
         requesting the information from the API
         """
         req = requests.get('{}users/{}'.format(url, uid))
-        name = req.json().get('name') # jsonify usernaame
-        if name is not None: # checking the username
+        name = req.json().get('name')  # jsonify usernaame
+        if name is not None:  # checking the username
             """
             todos for the user
             """
             todos = requests.get('{}users/{}/todos'.format(url,
-                                 uid)).json() # jsonify todos
+                                 uid)).json()  # jsonify todos
         with open('{}.csv'.format(uid), 'w', newline='') as csvf:
-            write = csv.writer(csvf, quoting=csv.QUOTE_ALL) # syscalls
-            for task in todos: # writing the tasks to the csv file
+            write = csv.writer(csvf, quoting=csv.QUOTE_ALL)  # syscalls
+            for task in todos:  # writing the tasks to the csv file
                 write.writerow([int(uid), name,
-                                   task.get('completed'),
-                                   task.get('title')]) # word
+                                task.get('completed'),
+                                task.get('title')])  # word
