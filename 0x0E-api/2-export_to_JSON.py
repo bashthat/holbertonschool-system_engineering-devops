@@ -5,7 +5,6 @@
 using a REST API returning the TODO list progress
 """
 
-from cgitb import reset
 import requests
 import sys
 import json
